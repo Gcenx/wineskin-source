@@ -48,7 +48,6 @@ Or build via the command line:
 ```bash
 $ xcodebuild -workspace Wineskin.xcworkspace -scheme Wineskin build
 $ xcodebuild -workspace Wineskin.xcworkspace -scheme "Wineskin Winery" build
-$ xcodebuild -workspace Wineskin.xcworkspace -scheme WineskinLauncher build
 ```
 
 ## Changes from the original project
@@ -71,13 +70,6 @@ Considering this, lots of changes were made in WineskinApp and WineskinLauncher,
 - Winetricks installation can be silent (with no windows) so it's much faster;
 - The first *Advanced* tab (*Configuration*) should be much more simple in the first section:
     - The *Windows EXE* should use Wineskin syntax, including the drive and the flags, (eg. *"C:/Program Files/temp.exe" --run*) instead of using a macOS reference path (eg. */Program Files/temp.exe*) and the flag apart (eg. *--run*).
-
-### Changes in the Master Wrapper (WineskinLauncher)
-
-- Many fixes when dealing with newest engines.
-- WineskinX11 dropped.
-- Closes processes XQuartz on exit
-- Can use XQuartz installed via macports
 
 ### Roadmap of desired changes in the Master Wrapper (WineskinLauncher)
 
