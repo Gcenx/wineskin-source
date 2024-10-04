@@ -5,7 +5,7 @@
       location = "group:WineskinApp/Wineskin.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Wineskin Winery/Wineskin Winery.xcodeproj">
+      location = "group:Winery/Winery.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:ObjectiveC_Extension/ObjectiveC_Extension.xcodeproj">

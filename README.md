@@ -47,7 +47,7 @@ Or build via the command line:
 
 ```bash
 $ xcodebuild -workspace Wineskin.xcworkspace -scheme Wineskin build
-$ xcodebuild -workspace Wineskin.xcworkspace -scheme "Wineskin Winery" build
+$ xcodebuild -workspace Wineskin.xcworkspace -scheme "Winery" build
 ```
 
 ## Changes from the original project

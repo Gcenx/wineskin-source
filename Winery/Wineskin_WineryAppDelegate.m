@@ -48,13 +48,13 @@
 - (void)makeFoldersAndFiles
 {
 	NSFileManager *filemgr = [NSFileManager defaultManager];
-    NSString* wineskinFolder = [NSString stringWithFormat:@"%@/Library/Application Support/Wineskin",NSHomeDirectory()];
+    NSString* wineskinFolder = [NSString stringWithFormat:@"%@/Library/Application Support/Kegworks",NSHomeDirectory()];
 	
     [filemgr createDirectoryAtPath:[wineskinFolder stringByAppendingString:@"/Engines"] withIntermediateDirectories:YES
                         attributes:nil error:nil];
 	[filemgr createDirectoryAtPath:[wineskinFolder stringByAppendingString:@"/Wrapper"] withIntermediateDirectories:YES
                         attributes:nil error:nil];
-	[filemgr createDirectoryAtPath:[NSHomeDirectory() stringByAppendingString:@"/Applications/Wineskin"] withIntermediateDirectories:YES
+	[filemgr createDirectoryAtPath:[NSHomeDirectory() stringByAppendingString:@"/Applications/Kegworks"] withIntermediateDirectories:YES
                         attributes:nil error:nil];
 }
 
@@ -248,7 +248,7 @@
     }
 	//move file to trash
 	NSArray *filenamesArray = [NSArray arrayWithObject:[NSString stringWithFormat:@"%@.tar.7z",engine.engineName]];
-	[[NSWorkspace sharedWorkspace] performFileOperation:NSWorkspaceRecycleOperation source:[NSString stringWithFormat:@"%@/Library/Application Support/Wineskin/Engines",NSHomeDirectory()] destination:@"" files:filenamesArray tag:nil];
+	[[NSWorkspace sharedWorkspace] performFileOperation:NSWorkspaceRecycleOperation source:[NSString stringWithFormat:@"%@/Library/Application Support/Kegworks/Engines",NSHomeDirectory()] destination:@"" files:filenamesArray tag:nil];
 	[self refreshButtonPressed:self];
 }
 
@@ -256,7 +256,7 @@
 {
     //TODO: Wrapper version
     //get latest available version number
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://raw.githubusercontent.com/The-Wineskin-Project/Wrapper/main/NewestVersion.txt?%@",[[NSNumber numberWithLong:rand()] stringValue]]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://raw.githubusercontent.com/Kegworks-App/Wrapper/main/NewestVersion.txt?%@",[[NSNumber numberWithLong:rand()] stringValue]]];
 	NSString *newVersion = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
 	newVersion = [newVersion stringByReplacingOccurrencesOfString:@"\n" withString:@""]; //remove \n
 	if (newVersion == nil || ![[newVersion substringToIndex:8] isEqualToString:@"Wineskin"])
@@ -270,7 +270,7 @@
 		return;
 	}
 	//download new wrapper to /tmp
-	[urlInput setStringValue:[NSString stringWithFormat:@"https://github.com/The-Wineskin-Project/Wrapper/releases/download/v1.0/%@.tar.7z?%@",newVersion,[[NSNumber numberWithLong:rand()] stringValue]]];
+	[urlInput setStringValue:[NSString stringWithFormat:@"https://github.com/Kegworks-App/Wrapper/releases/download/v1.0/%@.tar.7z?%@",newVersion,[[NSNumber numberWithLong:rand()] stringValue]]];
 	[urlOutput setStringValue:[NSString stringWithFormat:@"file:///tmp/%@.tar.7z",newVersion]];
 	[fileName setStringValue:newVersion];
 	[fileNameDestination setStringValue:@"Wrapper"];
@@ -316,7 +316,7 @@
 
 - (NSArray *)getEnginesToIgnore
 {
-	NSString *fileString = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@/Library/Application Support/Wineskin/IgnoredEngines.txt",NSHomeDirectory()] encoding:NSUTF8StringEncoding error:nil];
+	NSString *fileString = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@/Library/Application Support/Kegworks/IgnoredEngines.txt",NSHomeDirectory()] encoding:NSUTF8StringEncoding error:nil];
 	if ([fileString hasSuffix:@"\n"])
 	{
 		fileString = [fileString stringByAppendingString:@":!:!:"];
@@ -346,7 +346,7 @@
     else
     {
         //read online EngineList.txt
-        NSString *fileString = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://raw.githubusercontent.com/The-Wineskin-Project/Engines/main/EngineList.txt?%@",[[NSNumber numberWithLong:rand()] stringValue]]] encoding:NSUTF8StringEncoding error:nil];
+        NSString *fileString = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://raw.githubusercontent.com/Kegworks-App/Engines/main/EngineList.txt?%@",[[NSNumber numberWithLong:rand()] stringValue]]] encoding:NSUTF8StringEncoding error:nil];
         if ([fileString hasSuffix:@"\n"])
         {
             fileString = [fileString stringByAppendingString:@":!:!:"];
@@ -361,7 +361,7 @@
 
 - (NSString *)getCurrentWrapperVersion
 {
-	NSString *folder = [NSString stringWithFormat:@"%@/Library/Application Support/Wineskin/Wrapper",NSHomeDirectory()];
+	NSString *folder = [NSString stringWithFormat:@"%@/Library/Application Support/Kegworks/Wrapper",NSHomeDirectory()];
 	NSFileManager *fm = [NSFileManager defaultManager];
 	NSArray *filesArray = [fm contentsOfDirectoryAtPath:folder error:nil];
 	NSMutableArray *files = [NSMutableArray arrayWithCapacity:2];
@@ -415,7 +415,7 @@
 {
     NSDictionary* plistDictionary = [[NSDictionary alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@/Contents/Info.plist",[[NSBundle mainBundle] bundlePath]]];
 	//get latest available version number
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://raw.githubusercontent.com/The-Wineskin-Project/Wrapper/main/NewestVersion.txt?%@",[[NSNumber numberWithLong:rand()] stringValue]]];
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://raw.githubusercontent.com/Kegworks-App/Wrapper/main/NewestVersion.txt?%@",[[NSNumber numberWithLong:rand()] stringValue]]];
 	NSString *newVersion = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
 	newVersion = [newVersion stringByReplacingOccurrencesOfString:@"\n" withString:@""]; //remove \n
 	if (newVersion == nil || ![[newVersion substringToIndex:8] isEqualToString:@"Wineskin"]) return;
@@ -490,7 +490,7 @@
 		[alert runModal];
 		return;
 	}
-	if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Wineskin/Engines/%@.tar.7z",NSHomeDirectory(),[engineBuildEngineName stringValue]]])
+	if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Kegworks/Engines/%@.tar.7z",NSHomeDirectory(),[engineBuildEngineName stringValue]]])
 	{
 		NSAlert *alert = [[NSAlert alloc] init];
 		[alert addButtonWithTitle:@"OK"];
@@ -503,9 +503,9 @@
 
 	//write out the config file
 	NSString *configFileContents = [NSString stringWithFormat:@"%@\n%@\n%@\n%@\n%@\n%@\n",[engineBuildWineSource stringValue],[engineBuildEngineName stringValue],[engineBuildConfigurationOptions stringValue],[engineBuildCurrentEngineBase stringValue],[NSString stringWithFormat:@"%@", BINARY_7ZA],[[engineBuildOSVersionToBuildEngineFor selectedItem] title]];
-	[configFileContents writeToFile:[NSString stringWithFormat:@"%@/Library/Application Support/Wineskin/EngineBase/%@/config.txt",NSHomeDirectory(),[engineBuildCurrentEngineBase stringValue]] atomically:NO encoding:NSUTF8StringEncoding error:nil];
+	[configFileContents writeToFile:[NSString stringWithFormat:@"%@/Library/Application Support/Kegworks/EngineBase/%@/config.txt",NSHomeDirectory(),[engineBuildCurrentEngineBase stringValue]] atomically:NO encoding:NSUTF8StringEncoding error:nil];
 	//launch terminal with the script
-	system([[NSString stringWithFormat:@"open -a Terminal.app \"%@/Library/Application Support/Wineskin/EngineBase/%@/WineskinEngineBuild\"", NSHomeDirectory(),[engineBuildCurrentEngineBase stringValue]] UTF8String]);
+	system([[NSString stringWithFormat:@"open -a Terminal.app \"%@/Library/Application Support/Kegworks/EngineBase/%@/WineskinEngineBuild\"", NSHomeDirectory(),[engineBuildCurrentEngineBase stringValue]] UTF8String]);
 	//prompt user warning
 	NSAlert *alert = [[NSAlert alloc] init];
 	[alert addButtonWithTitle:@"OK"];
@@ -538,7 +538,7 @@
 
 - (NSString *)currentEngineBuildVersion
 {
-	NSString *folder = [NSString stringWithFormat:@"%@/Library/Application Support/Wineskin/EngineBase",NSHomeDirectory()];
+	NSString *folder = [NSString stringWithFormat:@"%@/Library/Application Support/Kegworks/EngineBase",NSHomeDirectory()];
 	NSFileManager *fm = [NSFileManager defaultManager];
 	NSArray *filesArray = [fm contentsOfDirectoryAtPath:folder error:nil];
 	NSMutableArray *files = [NSMutableArray arrayWithCapacity:2];
@@ -574,12 +574,12 @@
     NSString* selectedEngineName = [[engineWindowEngineList selectedItem] title];
     NSWineskinEngine* selectedEngine = [NSWineskinEngine wineskinEngineWithString:selectedEngineName];
 
-    [urlInput setStringValue:[NSString stringWithFormat:@"https://github.com/The-Wineskin-Project/Engines/releases/download/v1.0/%@.tar.7z?%@",selectedEngineName,[[NSNumber numberWithLong:rand()] stringValue]]];
+    [urlInput setStringValue:[NSString stringWithFormat:@"https://github.com/Kegworks-App/Engines/releases/download/v1.0/%@.tar.7z?%@",selectedEngineName,[[NSNumber numberWithLong:rand()] stringValue]]];
     [urlOutput setStringValue:[NSString stringWithFormat:@"file:///tmp/%@.tar.7z",[[engineWindowEngineList selectedItem] title]]];
     [fileName setStringValue:[[engineWindowEngineList selectedItem] title]];
     [fileNameDestination setStringValue:@"Engines"];
     // Workaround explorer.exe hang with CX24.x
-    system([[NSString stringWithFormat:@"/usr/bin/xattr -drs com.apple.quarantine \"%@/Library/Application Support/Wineskin/Engines\"",NSHomeDirectory()] UTF8String]);
+    system([[NSString stringWithFormat:@"/usr/bin/xattr -drs com.apple.quarantine \"%@/Library/Application Support/Kegworks/Engines\"",NSHomeDirectory()] UTF8String]);
     [downloadingWindow makeKeyAndOrderFront:self];
     [addEngineWindow orderOut:self];
 }
@@ -623,7 +623,7 @@
 		ignoredEnginesString = [ignoredEnginesString stringByAppendingString:[item stringByAppendingString:@"\n"]];
 	ignoredEnginesString = [NSString stringWithFormat:@"%@\n%@",ignoredEnginesString,[[engineWindowEngineList selectedItem] title]];
 	//write engine to ignored engines text file
-	[ignoredEnginesString writeToFile:[NSHomeDirectory() stringByAppendingString:@"/Library/Application Support/Wineskin/IgnoredEngines.txt"] atomically:YES encoding:NSUTF8StringEncoding error:nil];
+	[ignoredEnginesString writeToFile:[NSHomeDirectory() stringByAppendingString:@"/Library/Application Support/Kegworks/IgnoredEngines.txt"] atomically:YES encoding:NSUTF8StringEncoding error:nil];
 	//disable prompt button
 	[engineWindowDontPromptAsNewButton setEnabled:NO];
 	
@@ -655,7 +655,7 @@
 		ignoredEnginesString = [ignoredEnginesString stringByReplacingCharactersInRange:[ignoredEnginesString rangeOfString:@"\n"] withString:@""];
 	}
 	//write engine to ignored engines text file
-	[ignoredEnginesString writeToFile:[NSHomeDirectory() stringByAppendingString:@"/Library/Application Support/Wineskin/IgnoredEngines.txt"] atomically:YES encoding:NSUTF8StringEncoding error:nil];
+	[ignoredEnginesString writeToFile:[NSHomeDirectory() stringByAppendingString:@"/Library/Application Support/Kegworks/IgnoredEngines.txt"] atomically:YES encoding:NSUTF8StringEncoding error:nil];
 	//disable prompt button
 	[engineWindowDontPromptAsNewButton setEnabled:NO];
 }
@@ -807,19 +807,19 @@
 		[[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"/tmp/%@.tar.7z",[fileName stringValue]] error:nil];
 		[[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"/tmp/%@.tar",[fileName stringValue]] error:nil];
 		//remove old one
-		[[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Wineskin/Wrapper",NSHomeDirectory()] error:nil];
+		[[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Kegworks/Wrapper",NSHomeDirectory()] error:nil];
 		[self makeFoldersAndFiles];
 		//move download into place
-		[[NSFileManager defaultManager] moveItemAtPath:[NSString stringWithFormat:@"/tmp/%@.app",[fileName stringValue]] toPath:[NSString stringWithFormat:@"%@/Library/Application Support/Wineskin/%@/%@.app",NSHomeDirectory(),[fileNameDestination stringValue],[fileName stringValue]] error:nil];
-        system([[NSString stringWithFormat:@"/usr/bin/xattr -drs com.apple.quarantine \%@/Library/Application Support/Wineskin/%@/%@.app",NSHomeDirectory(),[fileNameDestination stringValue],[fileName stringValue]] UTF8String]);
+		[[NSFileManager defaultManager] moveItemAtPath:[NSString stringWithFormat:@"/tmp/%@.app",[fileName stringValue]] toPath:[NSString stringWithFormat:@"%@/Library/Application Support/Kegworks/%@/%@.app",NSHomeDirectory(),[fileNameDestination stringValue],[fileName stringValue]] error:nil];
+        system([[NSString stringWithFormat:@"/usr/bin/xattr -drs com.apple.quarantine \%@/Library/Application Support/Kegworks/%@/%@.app",NSHomeDirectory(),[fileNameDestination stringValue],[fileName stringValue]] UTF8String]);
 		[window makeKeyAndOrderFront:self];
 		[busyWindow orderOut:self];
 	}
 	else if (([[fileNameDestination stringValue] isEqualToString:@"Engines"]))
 	{
 		//move download into place
-		[[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Wineskin/%@/%@.tar.7z",NSHomeDirectory(),[fileNameDestination stringValue],[fileName stringValue]] error:nil];
-		[[NSFileManager defaultManager] moveItemAtPath:[NSString stringWithFormat:@"/tmp/%@.tar.7z",[fileName stringValue]] toPath:[NSString stringWithFormat:@"%@/Library/Application Support/Wineskin/%@/%@.tar.7z",NSHomeDirectory(),[fileNameDestination stringValue],[fileName stringValue]] error:nil];
+		[[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Kegworks/%@/%@.tar.7z",NSHomeDirectory(),[fileNameDestination stringValue],[fileName stringValue]] error:nil];
+		[[NSFileManager defaultManager] moveItemAtPath:[NSString stringWithFormat:@"/tmp/%@.tar.7z",[fileName stringValue]] toPath:[NSString stringWithFormat:@"%@/Library/Application Support/Kegworks/%@/%@.tar.7z",NSHomeDirectory(),[fileNameDestination stringValue],[fileName stringValue]] error:nil];
 		//Add engine to ignored list
 		NSArray *ignoredEngines = [self getEnginesToIgnore];
 		NSString *ignoredEnginesString = @"";
@@ -836,7 +836,7 @@
 		if (fixTheList)
 		{
 			ignoredEnginesString = [NSString stringWithFormat:@"%@\n%@",ignoredEnginesString,[fileName stringValue]];
-			[ignoredEnginesString writeToFile:[NSHomeDirectory() stringByAppendingString:@"/Library/Application Support/Wineskin/IgnoredEngines.txt"] atomically:YES encoding:NSUTF8StringEncoding error:nil];
+			[ignoredEnginesString writeToFile:[NSHomeDirectory() stringByAppendingString:@"/Library/Application Support/Kegworks/IgnoredEngines.txt"] atomically:YES encoding:NSUTF8StringEncoding error:nil];
 		}		
 		[window makeKeyAndOrderFront:self];
 		[busyWindow orderOut:self];
@@ -851,10 +851,10 @@
 		[[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"/tmp/%@.tar.7z",[fileName stringValue]] error:nil];
 		[[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"/tmp/%@.tar",[fileName stringValue]] error:nil];
 		//remove old one
-		[[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Wineskin/EngineBase",NSHomeDirectory()] error:nil];
+		[[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Kegworks/EngineBase",NSHomeDirectory()] error:nil];
 		[self makeFoldersAndFiles];
 		//move download into place
-		[[NSFileManager defaultManager] moveItemAtPath:[NSString stringWithFormat:@"/tmp/%@",[fileName stringValue]] toPath:[NSString stringWithFormat:@"%@/Library/Application Support/Wineskin/%@/%@",NSHomeDirectory(),[fileNameDestination stringValue],[fileName stringValue]] error:nil];		
+		[[NSFileManager defaultManager] moveItemAtPath:[NSString stringWithFormat:@"/tmp/%@",[fileName stringValue]] toPath:[NSString stringWithFormat:@"%@/Library/Application Support/Kegworks/%@/%@",NSHomeDirectory(),[fileNameDestination stringValue],[fileName stringValue]] error:nil];		
 		NSString *currentEngineBuild = [self currentEngineBuildVersion];
 		[engineBuildCurrentEngineBase setStringValue:currentEngineBuild];
 		NSString *availableEngineBase = [self availableEngineBuildVersion];
@@ -911,12 +911,12 @@
     [createWrapperName setStringValue:wrapperName];
 
 	//make sure wrapper name is unique
-	if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/Applications/Wineskin/%@.app",NSHomeDirectory(),[createWrapperName stringValue]]])
+	if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/Applications/Kegworks/%@.app",NSHomeDirectory(),[createWrapperName stringValue]]])
 	{
 		NSAlert *alert = [[NSAlert alloc] init];
 		[alert addButtonWithTitle:@"OK"];
 		[alert setMessageText:@"Oops! File already exists!"];
-		[alert setInformativeText:[NSString stringWithFormat:@"A wrapper at \"%@/Applications/Wineskin\" with the name \"%@\" already exists!  Please choose a different name.",NSHomeDirectory(),[createWrapperName stringValue]]];
+		[alert setInformativeText:[NSString stringWithFormat:@"A wrapper at \"%@/Applications/Kegworks\" with the name \"%@\" already exists!  Please choose a different name.",NSHomeDirectory(),[createWrapperName stringValue]]];
 		[alert setAlertStyle:NSInformationalAlertStyle];
 		[alert runModal];
 		return;
@@ -929,25 +929,25 @@
 	//delete files that might already exist
 	NSFileManager *fm = [NSFileManager defaultManager];
 	[fm removeItemAtPath:[NSString stringWithFormat:@"/tmp/%@.app",[createWrapperName stringValue]] error:nil];
-	[fm removeItemAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Wineskin/Engines/%@.tar",NSHomeDirectory(),[createWrapperEngine stringValue]] error:nil];
-	[fm removeItemAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Wineskin/Engines/wswine.bundle",NSHomeDirectory()] error:nil];
+	[fm removeItemAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Kegworks/Engines/%@.tar",NSHomeDirectory(),[createWrapperEngine stringValue]] error:nil];
+	[fm removeItemAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Kegworks/Engines/wswine.bundle",NSHomeDirectory()] error:nil];
 	//copy master wrapper to /tmp with correct name
-	[fm copyItemAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Wineskin/Wrapper/%@.app",NSHomeDirectory(),[wrapperVersion stringValue]] toPath:[NSString stringWithFormat:@"/tmp/%@.app",[createWrapperName stringValue]] error:nil];
+	[fm copyItemAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Kegworks/Wrapper/%@.app",NSHomeDirectory(),[wrapperVersion stringValue]] toPath:[NSString stringWithFormat:@"/tmp/%@.app",[createWrapperName stringValue]] error:nil];
 
 	//decompress engine
-	system([[NSString stringWithFormat:@"\"%@\" x \"%@/Library/Application Support/Wineskin/Engines/%@.tar.7z\" \"-o/%@/Library/Application Support/Wineskin/Engines\"", BINARY_7ZA,NSHomeDirectory(),[createWrapperEngine stringValue],NSHomeDirectory()] UTF8String]);
-	system([[NSString stringWithFormat:@"/usr/bin/tar -C \"%@/Library/Application Support/Wineskin/Engines\" -xf \"%@/Library/Application Support/Wineskin/Engines/%@.tar\"",NSHomeDirectory(),NSHomeDirectory(),[createWrapperEngine stringValue]] UTF8String]);
+	system([[NSString stringWithFormat:@"\"%@\" x \"%@/Library/Application Support/Kegworks/Engines/%@.tar.7z\" \"-o/%@/Library/Application Support/Kegworks/Engines\"", BINARY_7ZA,NSHomeDirectory(),[createWrapperEngine stringValue],NSHomeDirectory()] UTF8String]);
+	system([[NSString stringWithFormat:@"/usr/bin/tar -C \"%@/Library/Application Support/Kegworks/Engines\" -xf \"%@/Library/Application Support/Kegworks/Engines/%@.tar\"",NSHomeDirectory(),NSHomeDirectory(),[createWrapperEngine stringValue]] UTF8String]);
 
     //TODO: wtf
     [self makeFoldersAndFiles];
     //system([[NSString stringWithFormat:@"/usr/bin/tar zxf /tmp/%@.tar.gz --strip-components=2 -C /tmp/wswine.bundle",[fileName stringValue]] UTF8String]);
 
 	//remove tar
-	[fm removeItemAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Wineskin/Engines/%@.tar",NSHomeDirectory(),[createWrapperEngine stringValue]] error:nil];
+	[fm removeItemAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Kegworks/Engines/%@.tar",NSHomeDirectory(),[createWrapperEngine stringValue]] error:nil];
 	//test a couple of file sint he engine just to make sure it isn't corrupted
 	BOOL engineError=NO;
-	if (![fm fileExistsAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Wineskin/Engines/wswine.bundle",NSHomeDirectory()]]) engineError=YES;
-	else if (![fm fileExistsAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Wineskin/Engines/wswine.bundle/bin/wineserver",NSHomeDirectory()]]) engineError=YES;
+	if (![fm fileExistsAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Kegworks/Engines/wswine.bundle",NSHomeDirectory()]]) engineError=YES;
+	else if (![fm fileExistsAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Kegworks/Engines/wswine.bundle/bin/wineserver",NSHomeDirectory()]]) engineError=YES;
 	if (engineError)
 	{
 		NSAlert *alert = [[NSAlert alloc] init];
@@ -958,29 +958,15 @@
 		[alert runModal];
 		//get rid of junk in /tmp
 		[fm removeItemAtPath:[NSString stringWithFormat:@"/tmp/%@.app",[createWrapperName stringValue]] error:nil];
-		[fm removeItemAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Wineskin/Engines/%@.tar",NSHomeDirectory(),[createWrapperEngine stringValue]] error:nil];
-		[fm removeItemAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Wineskin/Engines/wswine.bundle",NSHomeDirectory()] error:nil];
+		[fm removeItemAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Kegworks/Engines/%@.tar",NSHomeDirectory(),[createWrapperEngine stringValue]] error:nil];
+		[fm removeItemAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Kegworks/Engines/wswine.bundle",NSHomeDirectory()] error:nil];
 	}
 	else
 	{
         //TODO: Put engine in wrapper
-		[fm copyItemAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Wineskin/Engines/wswine.bundle",NSHomeDirectory()] toPath:[NSString stringWithFormat:@"/tmp/%@.app/Contents/SharedSupport/wine",[createWrapperName stringValue]] error:nil];
-        [fm removeItemAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Wineskin/Engines/wswine.bundle",NSHomeDirectory()] error:nil];
-        
-        //Remove these items on older packaged Engines
-        //TODO: Find a cleaner way to remove *.a & *.la files instead of listing them
-        //Remove these items
-        for (NSString* remove in @[@"lzcat", @"lzcmp", @"lzdiff", @"lzegrep", @"lzfgrep", @"lzgrep", @"lzless", @"lzma", @"lzmore", @"unlzma", @"unxz", @"xzcat", @"xzcmp", @"xzegrep", @"xzfgrep", @"altonegen", @"bsincgen", @"cjpeg", @"djpeg", @"fax2ps", @"fax2tiff", @"jpegtran", @"jpgicc", @"linkicc", @"lzmadec", @"lzmainfo", @"makehrtf", @"openal-info", @"pal2rgb", @"ppm2tiff", @"psicc", @"raw2tiff", @"rdjpgcom", @"s2tc_compress", @"s2tc_decompress", @"s2tc_from_s3tc", @"sdl2-config", @"tiff2bw", @"tiff2pdf", @"tiff2ps", @"tiff2rgba", @"tiffcmp", @"tiffcp", @"tiffcrop", @"tiffdither", @"tiffdump", @"tiffinfo", @"tiffmedian", @"tiffset", @"tiffsplit", @"tificc", @"tjbench", @"transicc", @"wrjpgcom", @"xml2-config", @"xmlcatalog", @"xmllint", @"xslt-config", @"xsltproc", @"xz", @"xzdec", @"xzdiff", @"xzgrep", @"xzless", @"xzmore", @"SDL2.framework", @"include", @"cmake", @"pkgconfig", @"libxslt-plugins", @"aclocal", @"doc", @"gtk-doc", @"man", @"openal", @"libxslt.a", @"libexslt.dylib", @"libFAudio.dylib", @"libopenal.dylib", @"libFAudio.0.dylib", @"liblcms2.dylib", @"liblzma.dylib", @"libopenal.1.dylib", @"libSDL2.dylib", @"libtiff.dylib", @"libtiffxx.dylib", @"libxml2.dylib", @"libxslt.dylib", @"libexslt.0.dylib", @"libexslt.a", @"libexslt.la", @"libFAudio.0.19.03.dylib", @"libjpeg.a", @"libjpeg.la", @"liblcms2.2.dylib", @"liblcms2.a", @"liblcms2.la", @"liblzma.5.dylib", @"liblzma.a", @"liblzma.la", @"libopenal.1.17.2.dylib", @"libSDL2-2.0.dylib", @"libSDL2.a", @"libSDL2main.a", @"libtiff.5.dylib", @"libtiff.a", @"libtiff.la", @"libtiffxx.5.dylib", @"libtiffxx.a", @"libtiffxx.la", @"libturbojpeg.a", @"libturbojpeg.la", @"libtxc_dxtn.a", @"libtxc_dxtn.la", @"libxml2.2.dylib", @"libxml2.a", @"libxml2.la", @"libxslt.1.dylib", @"libxslt.la", @"xml2Conf.sh", @"xsltConf.sh"])
-        {
-            [fm removeItemAtPath:[NSString stringWithFormat:@"/tmp/%@.app/Contents/SharedSupport/wine/%@",[createWrapperName stringValue], remove] error:nil];
-            [fm removeItemAtPath:[NSString stringWithFormat:@"/tmp/%@.app/Contents/SharedSupport/wine/bin/%@",[createWrapperName stringValue], remove] error:nil];
-            [fm removeItemAtPath:[NSString stringWithFormat:@"/tmp/%@.app/Contents/SharedSupport/wine/lib/%@",[createWrapperName stringValue], remove] error:nil];
-            [fm removeItemAtPath:[NSString stringWithFormat:@"/tmp/%@.app/Contents/SharedSupport/wine/lib64/%@",[createWrapperName stringValue], remove] error:nil];
-            [fm removeItemAtPath:[NSString stringWithFormat:@"/tmp/%@.app/Contents/SharedSupport/wine/lib32on64/%@",[createWrapperName stringValue], remove] error:nil];
-
-            [fm removeItemAtPath:[NSString stringWithFormat:@"/tmp/%@.app/Contents/SharedSupport/wine/share/%@",[createWrapperName stringValue], remove] error:nil];
-        }
-        
+		[fm copyItemAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Kegworks/Engines/wswine.bundle",NSHomeDirectory()] toPath:[NSString stringWithFormat:@"/tmp/%@.app/Contents/SharedSupport/wine",[createWrapperName stringValue]] error:nil];
+        [fm removeItemAtPath:[NSString stringWithFormat:@"%@/Library/Application Support/Kegworks/Engines/wswine.bundle",NSHomeDirectory()] error:nil];
+                
         // 777 the wrapper
         system([[NSString stringWithFormat:@"chmod -R 777 \"/tmp/%@.app\"",[createWrapperName stringValue]] UTF8String]);
 
@@ -992,19 +978,19 @@
         //initialize wrapper
         system([[NSString stringWithFormat:@"\"/tmp/%@.app/Contents/MacOS/wineskinlauncher\" WSS-wineprefixcreate",[createWrapperName stringValue]] UTF8String]);
 
-		//move wrapper to ~/Applications/Wineskin
-		[fm moveItemAtPath:[NSString stringWithFormat:@"/tmp/%@.app",[createWrapperName stringValue]] toPath:[NSString stringWithFormat:@"%@/Applications/Wineskin/%@.app",NSHomeDirectory(),[createWrapperName stringValue]] error:nil];
+		//move wrapper to ~/Applications/Kegworks
+		[fm moveItemAtPath:[NSString stringWithFormat:@"/tmp/%@.app",[createWrapperName stringValue]] toPath:[NSString stringWithFormat:@"%@/Applications/Kegworks/%@.app",NSHomeDirectory(),[createWrapperName stringValue]] error:nil];
 
 		//put ending message
 		NSAlert *alert = [[NSAlert alloc] init];
 		[alert addButtonWithTitle:@"View wrapper in Finder"];
 		[alert addButtonWithTitle:@"OK"];
 		[alert setMessageText:@"Wrapper Creation Finished"];
-		[alert setInformativeText:[NSString stringWithFormat:@"Created File: %@.app\n\nCreated In:%@/Applications/Wineskin\n",[createWrapperName stringValue],NSHomeDirectory()]];
+		[alert setInformativeText:[NSString stringWithFormat:@"Created File: %@.app\n\nCreated In:%@/Applications/Kegworks\n",[createWrapperName stringValue],NSHomeDirectory()]];
 		[alert setAlertStyle:NSInformationalAlertStyle];
 		if ([alert runModal] == NSAlertFirstButtonReturn)
         {
-			[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"file://%@/Applications/Wineskin/",NSHomeDirectory()]]];
+			[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"file://%@/Applications/Kegworks/",NSHomeDirectory()]]];
         }
 	}
 	// bring main window back

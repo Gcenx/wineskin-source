@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23094" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment version="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23094"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,10 +15,10 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <menu title="AMainMenu" systemMenu="main" id="29">
             <items>
-                <menuItem title="Wineskin Winery" id="56">
-                    <menu key="submenu" title="Wineskin Winery" systemMenu="apple" id="57">
+                <menuItem title="Winery" id="56">
+                    <menu key="submenu" title="Winery" systemMenu="apple" id="57">
                         <items>
-                            <menuItem title="About Wineskin Winery" id="58">
+                            <menuItem title="About Winery" id="58">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="aboutWindow:" target="494" id="849"/>
@@ -37,7 +37,7 @@
                             <menuItem isSeparatorItem="YES" id="144">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Hide Wineskin Winery" keyEquivalent="h" id="134">
+                            <menuItem title="Hide Winery" keyEquivalent="h" id="134">
                                 <connections>
                                     <action selector="hide:" target="-1" id="367"/>
                                 </connections>
@@ -56,7 +56,7 @@
                             <menuItem isSeparatorItem="YES" id="149">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Quit Wineskin Winery" keyEquivalent="q" id="136">
+                            <menuItem title="Quit Winery" keyEquivalent="q" id="136">
                                 <connections>
                                     <action selector="terminate:" target="-3" id="449"/>
                                 </connections>
@@ -173,7 +173,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Help" systemMenu="help" id="491">
                         <items>
-                            <menuItem title="Wineskin Winery Help" keyEquivalent="?" id="492">
+                            <menuItem title="Winery Help" keyEquivalent="?" id="492">
                                 <connections>
                                     <action selector="helpWindow:" target="494" id="871"/>
                                 </connections>
@@ -182,9 +182,9 @@
                     </menu>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="131" y="154"/>
+            <point key="canvasLocation" x="-64" y="331"/>
         </menu>
-        <window title="Wineskin Winery" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="371">
+        <window title="Winery" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="371">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <rect key="contentRect" x="839" y="431" width="404" height="460"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1352" height="843"/>
@@ -421,7 +421,7 @@ DQ
                     <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="875">
                         <rect key="frame" x="17" y="123" width="226" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Wineskin Winery Version:" id="876">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Winery Version:" id="876">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -455,7 +455,7 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" drawsBackground="NO" id="TsJ-gf-RoT">
                             <rect key="frame" x="1" y="1" width="218" height="80"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" spellingCorrection="YES" smartInsertDelete="YES" id="855">
                                     <rect key="frame" x="0.0" y="0.0" width="218" height="80"/>
@@ -466,7 +466,7 @@ Gw
                                     <size key="maxSize" width="463" height="10000000"/>
                                     <attributedString key="textStorage">
                                         <fragment>
-                                            <string key="content">Wineskin Winery
+                                            <string key="content">Winery
 
 For more information see
 </string>
@@ -515,7 +515,7 @@ For more information see
                                                 </paragraphStyle>
                                             </attributes>
                                         </fragment>
-                                        <fragment content="https://github.com/The-Wineskin-Project/WineskinServer">
+                                        <fragment content="https://github.com/gcenx/WineskinServer">
                                             <attributes>
                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Helvetica"/>
@@ -598,7 +598,7 @@ For more information see
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" drawsBackground="NO" id="Udc-Oh-TtX">
                             <rect key="frame" x="1" y="1" width="215" height="74"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" spellingCorrection="YES" smartInsertDelete="YES" id="867">
                                     <rect key="frame" x="0.0" y="0.0" width="215" height="74"/>
@@ -704,11 +704,11 @@ Help is available on the main website
                                                 </paragraphStyle>
                                             </attributes>
                                         </fragment>
-                                        <fragment content="https://github.com/The-Wineskin-Project/WineskinServer">
+                                        <fragment content="https://github.com/Gcenx/WineskinServer">
                                             <attributes>
                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Helvetica"/>
-                                                <url key="NSLink" string="https://github.com/The-Wineskin-Project/WineskinServer/"/>
+                                                <url key="NSLink" string="https://github.com/Gcenx/WineskinServer"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0">
                                                     <tabStops>
                                                         <textTab alignment="left" location="36">
