@@ -1139,16 +1139,10 @@ NSFileManager *fm;
 
 - (IBAction)winetricksUpdateButtonPressed:(id)sender
 {
-    //Get the URL where winetricks is located
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://raw.githubusercontent.com/The-Wineskin-Project/WineskinServer/main/WineskinWinetricks/Location.txt?%@",[[NSNumber numberWithLong:rand()] stringValue]]];
-    NSString *urlWhereWinetricksIs = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding timeoutInterval:5];
-
-	urlWhereWinetricksIs = [urlWhereWinetricksIs stringByReplacingOccurrencesOfString:@"\n" withString:@""]; //remove \n
-
     // Only show Warning if winetricks is already installed
     if ([fm fileExistsAtPath:[NSString stringWithFormat:@"%@/Contents/Resources/winetricks",[[NSBundle mainBundle] bundlePath]]]) {
         //confirm update
-        if ([NSAlert showBooleanAlertOfType:NSAlertTypeWarning withMessage:[NSString stringWithFormat:@"Are you sure you want to update to the latest version of Winetricks?\n\nThe latest version from...\n\t%@\nwill be downloaded and installed for this wrapper.",urlWhereWinetricksIs] withDefault:NO] == false) {
+        if ([NSAlert showBooleanAlertOfType:NSAlertTypeWarning withMessage:[NSString stringWithFormat:@"Are you sure you want to update to the latest version of Winetricks?"] withDefault:NO] == false) {
             return;
         }
     }
@@ -1159,7 +1153,7 @@ NSFileManager *fm;
 	[winetricksWindow orderOut:self];
 
     //Use downloader to download
-	NSData *newVersion = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlWhereWinetricksIs] timeoutInterval:5];
+	NSData *newVersion = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://raw.githubusercontent.com/Kegworks-App/winetricks/refs/heads/kegworks/src/winetricks"] timeoutInterval:5];
 	//if new version looks messed up, prompt the download failed, and exit.
 	if (newVersion.length < 50) {
         [NSAlert showAlertOfType:NSAlertTypeError withMessage:@"Connection to the website failed. The site is either down currently, or there is a problem with your internet connection."];
