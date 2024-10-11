@@ -515,11 +515,11 @@ For more information see
                                                 </paragraphStyle>
                                             </attributes>
                                         </fragment>
-                                        <fragment content="https://github.com/gcenx/WineskinServer">
+                                        <fragment content="https://github.com/Kegworks-App">
                                             <attributes>
                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Helvetica"/>
-                                                <url key="NSLink" string="https://github.com/The-Wineskin-Project/WineskinServer/"/>
+                                                <url key="NSLink" string="https://github.com/Kegworks-App"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" allowsDefaultTighteningForTruncation="NO">
                                                     <tabStops>
                                                         <textTab alignment="left" location="36">
