@@ -1738,7 +1738,7 @@ Gw
                     <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="861">
                         <rect key="frame" x="17" y="60" width="179" height="34"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" title="Wineskin is currently busy Please Wait..." id="862">
+                        <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" title="Kegworks is currently busy Please Wait..." id="862">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -1865,10 +1865,8 @@ DQ
                                 <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="984">
                                     <rect key="frame" x="15" y="5" width="260" height="56"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" id="985">
+                                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" title="These are what is available installed on your machine.  To get more engines, install them with Kegworks Winery" id="985">
                                         <font key="font" metaFont="miniSystem"/>
-                                        <string key="title">These are what is available installed on your machine.  To get more engines, install them with Unofficial Wineskin Winery, or manually download them from the Unofficial Wineskin website 
-(https://github.com/The-Wineskin-Project/WineskinServer/)</string>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
@@ -2632,7 +2630,7 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" drawsBackground="NO" id="ig0-LL-WRa">
                             <rect key="frame" x="1" y="1" width="161" height="74"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" smartInsertDelete="YES" id="1374" propertyAccessControl="none">
                                     <rect key="frame" x="0.0" y="0.0" width="161" height="74"/>
@@ -2643,7 +2641,7 @@ Gw
                                     <size key="maxSize" width="463" height="10000000"/>
                                     <attributedString key="textStorage">
                                         <fragment>
-                                            <string key="content">Wineskin
+                                            <string key="content">Kegworks
 
 For more information see
 </string>
@@ -2692,11 +2690,11 @@ For more information see
                                                 </paragraphStyle>
                                             </attributes>
                                         </fragment>
-                                        <fragment content="https://github.com/The-Wineskin-Project/WineskinServer">
+                                        <fragment content="https://github.com/Kegworks-App">
                                             <attributes>
                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <font key="NSFont" size="12" name="Helvetica"/>
-                                                <url key="NSLink" string="https://github.com/Gcenx/WineskinServer"/>
+                                                <url key="NSLink" string="https://github.com/Kegworks-App"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural">
                                                     <tabStops>
                                                         <textTab alignment="left" location="36">
