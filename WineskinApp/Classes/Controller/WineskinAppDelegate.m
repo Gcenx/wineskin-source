@@ -273,7 +273,7 @@ NSFileManager *fm;
 
 - (IBAction)wineskinWebsiteButtonPressed:(id)sender
 {
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/The-Wineskin-Project/WineskinServer/"]];
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/Kegworks-App/Kegworks/"]];
 }
 
 - (IBAction)installWindowsSoftwareButtonPressed:(id)sender
@@ -1152,8 +1152,8 @@ NSFileManager *fm;
 	//hide Winetricks window
 	[winetricksWindow orderOut:self];
 
-    //Use downloader to download
-	NSData *newVersion = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://raw.githubusercontent.com/Kegworks-App/winetricks/refs/heads/kegworks/src/winetricks"] timeoutInterval:5];
+    //Use downloader to download, increase timeoutInterval from 5 to 30
+	NSData *newVersion = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://raw.githubusercontent.com/Kegworks-App/winetricks/refs/heads/kegworks/src/winetricks"] timeoutInterval:30];
 	//if new version looks messed up, prompt the download failed, and exit.
 	if (newVersion.length < 50) {
         [NSAlert showAlertOfType:NSAlertTypeError withMessage:@"Connection to the website failed. The site is either down currently, or there is a problem with your internet connection."];
@@ -1437,43 +1437,6 @@ NSFileManager *fm;
 
 		[self setWinetricksList:list];
 		[self setWinetricksFilteredList:list];
-
-		if ([defaults boolForKey:@"InstalledColumnShown"]) {
-			// List of installed winetricks
-			list = [NSDictionary dictionaryWithContentsOfFile:[NSString stringWithFormat:@"%@/Contents/Resources/winetricksInstalled.plist",[[NSBundle mainBundle] bundlePath]]];
-			if (!list[WINETRICK_INSTALLED] || ![list[WINETRICK_INSTALLED] isKindOfClass:[NSArray class]]) {
-                // Invalid or missing list.  Rebuild it (it only happens on a newly created wrapper or after a wrapper rebuild
-				[self systemCommand:[NSPathUtilities wineskinLauncherBinForPortAtPath:self.wrapperPath] withArgs:[NSArray arrayWithObjects:@"WSS-winetricks", @"list-installed", nil]];
-
-                //TODO: Handle generating winetricksInstalled.plist better
-                if ([fm fileExistsAtPath:[NSString stringWithFormat:@"%@/Contents/SharedSupport/prefix/winetricks.log", self.wrapperPath]]) {
-                    NSArray *tempList = [[[NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@/Contents/SharedSupport/prefix/winetricks.log", self.wrapperPath] encoding:NSUTF8StringEncoding] componentsSeparatedByString:@"\n"] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-                    list = @{WINETRICK_INSTALLED: tempList};
-                    [list writeToFile:[NSString stringWithFormat:@"%@/Contents/Resources/winetricksInstalled.plist",[[NSBundle mainBundle] bundlePath]] atomically:YES];
-                } else {
-                    NSArray *tempList = [[[NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@/Contents/SharedSupport/Logs/WinetricksTemp.log", self.wrapperPath] encoding:NSUTF8StringEncoding] componentsSeparatedByString:@"\n"] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-                    list = @{WINETRICK_INSTALLED: tempList};
-                    [list writeToFile:[NSString stringWithFormat:@"%@/Contents/Resources/winetricksInstalled.plist",[[NSBundle mainBundle] bundlePath]] atomically:YES];
-                }
-			}
-			[self setWinetricksInstalledList:list[WINETRICK_INSTALLED]];
-		} else {
-			[self setWinetricksInstalledList:[NSArray array]];
-		}
-		if ([defaults boolForKey:@"DownloadedColumnShown"]) {
-			// List of downloaded winetricks
-			list = [NSDictionary dictionaryWithContentsOfFile:[NSString stringWithFormat:@"%@/winetricks/winetricksCached.plist", [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0]]];
-			if (!list[WINETRICK_CACHED] || ![list[WINETRICK_CACHED] isKindOfClass:[NSArray class]]) {
-                // Invalid or missing list.  Rebuild it (it only happens when the user first runs wineetricks on their system (from any wrapper) or after wiping ~/Caches/winetricks
-				[self systemCommand:[NSPathUtilities wineskinLauncherBinForPortAtPath:self.wrapperPath] withArgs:[NSArray arrayWithObjects:@"WSS-winetricks",@"list-cached",nil]];
-				NSArray *tempList = [[[NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@/Contents/SharedSupport/Logs/WinetricksTemp.log", self.wrapperPath] encoding:NSUTF8StringEncoding] componentsSeparatedByString:@"\n"] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-                list = @{WINETRICK_CACHED: tempList};
-				[list writeToFile:[NSString stringWithFormat:@"%@/winetricks/winetricksCached.plist", [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0]] atomically:YES];
-			}
-			[self setWinetricksCachedList:list[WINETRICK_CACHED]];
-		} else {
-			[self setWinetricksCachedList:[NSArray array]];
-        }
 	}
 }
 
@@ -2251,9 +2214,7 @@ NSFileManager *fm;
     }
 	if (outlineView != winetricksOutlineView)
 		return nil;
-	if ((tableColumn == winetricksTableColumnRun
-	     || tableColumn == winetricksTableColumnInstalled
-	     || tableColumn == winetricksTableColumnDownloaded)
+	if ((tableColumn == winetricksTableColumnRun)
         && [item valueForKey:WINETRICK_NAME] == nil) {
         return @"";
     }
@@ -2262,17 +2223,6 @@ NSFileManager *fm;
 		if (thisEntry == nil)
 			return [NSNumber numberWithBool:NO];
 		return thisEntry;
-	} else if (tableColumn == winetricksTableColumnInstalled) {
-		for (NSString *eachEntry in [self winetricksInstalledList])
-            if ([eachEntry isEqualToString:[item valueForKey:WINETRICK_NAME]]) {
-                return @"\u2713"; // Check mark character
-            }
-		return @"";
-	} else if (tableColumn == winetricksTableColumnDownloaded) {
-		for (NSString *eachEntry in [self winetricksCachedList])
-			if ([eachEntry isEqualToString:[item valueForKey:WINETRICK_NAME]])
-				return @"\u2713"; // Check mark character
-		return @"";
 	} else if (tableColumn == winetricksTableColumnName) {
         if ([item valueForKey:WINETRICK_NAME] != nil) {
             return [item valueForKey:WINETRICK_NAME];
